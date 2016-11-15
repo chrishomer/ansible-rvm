@@ -13,12 +13,12 @@
 
 - name: installing RVM as root
   command: "{{rvm.temp_installer_path}} --path {{rvm_root}} stable"
-  sudo: true
+  become: true
   when: "'{{ rvm_install_type }}' == 'system'"
 
 - name: installing RVM as user
   command: "{{rvm.temp_installer_path}} --path {{rvm_root}} stable"
-  sudo: false
+  become: false
   when: "'{{ rvm_install_type }}' == 'user'"
 
 - name: removing RVM installer
@@ -28,10 +28,10 @@
 
 - name: setting RVM autolibs on as root
   command: "{{rvm_root}}/bin/rvm autolibs 3"
-  sudo: true
+  become: true
   when: "'{{ rvm_install_type }}' == 'system'"
 
 - name: setting RVM autolibs on as user
   command: "{{rvm_root}}/bin/rvm autolibs 3"
-  sudo: false
+  become: false
   when: "'{{ rvm_install_type }}' == 'user'"
